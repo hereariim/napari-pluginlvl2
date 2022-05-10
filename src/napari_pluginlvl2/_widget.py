@@ -19,8 +19,6 @@ from skimage import data
 import sys
 
 import numpy
-import tensorflow as tf
-from tensorflow import keras
 #!pip install focal_loss
 from focal_loss import BinaryFocalLoss
 import numpy as np
@@ -54,14 +52,14 @@ class ExampleQWidget(QWidget):
 
 def do_otsu(layer: ImageData) -> ImageData:
     
-    from tensorflow.keras import backend as K
     import cv2
     img = cv2.cvtColor(layer, cv2.COLOR_BGR2GRAY)
     ret, thresh1 = cv2.threshold(img, 120, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     return thresh1
  
 def do_image_segmentation(layer: ImageData) -> ImageData:
-    
+    import tensorflow as tf
+    from tensorflow import keras
     from tensorflow.keras import backend as K
     import cv2
     def redimension(image):
