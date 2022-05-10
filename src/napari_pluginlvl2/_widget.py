@@ -14,7 +14,6 @@ from subprocess import call
 import numpy
 import napari
 from napari.types import ImageData
-import cv2
 from magicgui import magic_factory, magicgui
 from skimage import data
 import sys
@@ -26,7 +25,6 @@ from tensorflow import keras
 from focal_loss import BinaryFocalLoss
 from tensorflow.keras import backend as K
 import numpy as np
-import cv2
 from skimage.io import imread, imshow, imread_collection, concatenate_images
 from skimage.transform import resize
 from napari.qt.threading import thread_worker
@@ -56,14 +54,13 @@ class ExampleQWidget(QWidget):
 
 
 def do_otsu(layer: ImageData) -> ImageData:
+    import cv2
     img = cv2.cvtColor(layer, cv2.COLOR_BGR2GRAY)
     ret, thresh1 = cv2.threshold(img, 120, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     return thresh1
  
-def do_image_segmentation(
-    layer: ImageData
-    ) -> ImageData:
-    
+def do_image_segmentation(layer: ImageData) -> ImageData:
+    import cv2
     def redimension(image):
         X = np.zeros((1,256,256,3),dtype=np.uint8)   
         size_ = image.shape
