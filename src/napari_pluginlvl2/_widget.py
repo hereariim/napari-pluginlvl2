@@ -20,7 +20,7 @@ import sys
 
 import numpy
 #!pip install focal_loss
-from focal_loss import BinaryFocalLoss
+
 import numpy as np
 from skimage.io import imread, imshow, imread_collection, concatenate_images
 from skimage.transform import resize
@@ -61,6 +61,7 @@ def do_image_segmentation(layer: ImageData) -> ImageData:
     import tensorflow as tf
     from tensorflow import keras
     from tensorflow.keras import backend as K
+    from focal_loss import BinaryFocalLoss
     import cv2
     def redimension(image):
         X = np.zeros((1,256,256,3),dtype=np.uint8)   
